@@ -18,10 +18,13 @@ const LandingPage = () => {
 
     try {
       // Envoi du formulaire à votre backend
-      const response = await fetch("http://localhost:3000/api/upload-cv", {
-        method: "POST",
-        body: formData,
-      })
+      const response = await fetch(
+        "https://form-back-hjkx.onrender.com/api/upload-cv",
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
 
       if (response.ok) {
         alert("CV envoyé avec succès !")
@@ -37,11 +40,11 @@ const LandingPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col  gap-10 w-full lg:pb-20 pb-10">
+    <div className="min-h-screen flex flex-col  gap-10 w-full lg:pb-20 pb-10 bg-stone-100 ">
       {loading && (
         <div className="loading-screen">
           <div className="spinner"></div>
-          <p className="text-white">Envoi en cours...</p>
+          <p className="text-white mx-2">Envoi en cours...</p>
         </div>
       )}
       <div className="bg-black w-full p-8  ">
@@ -50,10 +53,10 @@ const LandingPage = () => {
       <h1 className="lg:text-4xl text-center font-semibold ">
         Annonces de Recrutement{" "}
       </h1>
-      <div className="flex">
-        <div className="flex flex-col gap-2 lg:mx-10 bg-white shadow-xl border lg:p-5 lg:w-[50%]">
+      <div className="flex flex-wrap lg:flex-nowrap">
+        <div className="flex flex-col gap-2 lg:mx-10 bg-white shadow-xl border lg:p-5 p-3 lg:my-0 my-5 lg:w-[50%]">
           <h2 className="lg:text-2xl font-semibold">
-            Poste : Digital Project Manager
+            1-Poste : Digital Project Manager
           </h2>
           <h2 className="lg:text-2xl font-semibold">Lieu : Alger- Hydra</h2>
           <h2 className="lg:text-2xl font-semibold">Type de contrat : [CDI]</h2>
@@ -103,9 +106,9 @@ const LandingPage = () => {
 
         {/* recrutement DA */}
 
-        <div className="flex flex-col gap-2 lg:mx-10 bg-white shadow-xl border lg:p-5 lg:w-[50%]">
+        <div className="flex flex-col gap-2 lg:mx-10 bg-white shadow-xl border lg:p-5 p-3 lg:my-0 my-5 lg:w-[50%]">
           <h2 className="lg:text-2xl font-semibold">
-            Poste : Directeur Artistique
+            2-Poste : Directeur Artistique
           </h2>
           <h2 className="lg:text-2xl font-semibold">Lieu : Alger- Hydra</h2>
           <h2 className="lg:text-2xl font-semibold">Type de contrat : [CDI]</h2>
@@ -161,43 +164,50 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <p className="text-center lg:text-2xl font-semibold lg:mt-8 lg:mb-3">
-        Remplissez ce formualire pour pouvoir postuler
-      </p>
-      {/* formulaire d'envoi */}
-      <form
-        className="flex flex-col items-center self-center gap-6 bg-gray-100  lg:p-8"
-        onSubmit={handleSubmit}
-      >
-        <input
-          className="py-1 border border-black pl-3"
-          type="text"
-          placeholder="Nom complet"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          className="py-1 border border-black pl-3"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="file"
-          accept=".pdf,.doc,.docx"
-          onChange={(e) => setCv(e.target.files[0])}
-          required
-        />
-        <button
-          className="bg-black text-white rounded-xl py-1 lg:px-8"
-          type="submit"
+      <div className="flex flex-col p-5 lg:p-10 bg-black">
+        <p className="text-center lg:text-2xl font-semibold lg:mt-8 lg:mb-6 mb-3 text-white">
+          Remplissez ce formulaire pour pouvoir postuler pour l'une des offres
+          ci-dessus
+        </p>
+        {/* formulaire d'envoi */}
+        <form
+          className="flex flex-col items-center self-center gap-6 bg-white rounded-xl lg:p-8 p-5"
+          onSubmit={handleSubmit}
         >
-          Envoyer
-        </button>
-      </form>
+          <input
+            className="py-1 border border-black rounded-md placeholder:text-black placeholder:text-sm pl-3"
+            type="text"
+            placeholder="Nom complet"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            className="py-1 border border-black rounded-md placeholder:text-black placeholder:text-sm pl-3"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <div className="flex items-center">
+            <p className="text-xs lg:text-sm">Cv(pdf,doc,docx) </p>
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx"
+              onChange={(e) => setCv(e.target.files[0])}
+              required
+            />
+          </div>
+
+          <button
+            className="bg-black text-white rounded-xl py-1 lg:px-8 px-3"
+            type="submit"
+          >
+            Envoyer
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
