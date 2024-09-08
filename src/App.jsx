@@ -417,7 +417,7 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div className="bg-black p-10 text-center">
+      <div className="bg-black lg:p-10 p-3 text-center">
         <p className="text-white lg:text-4xl text-2xl my-3">Postulez maintenant !</p>
         <form className="w-full lg:w-[50%] m-auto" onSubmit={handleSubmit}>
           <input
@@ -436,12 +436,17 @@ const LandingPage = () => {
             required
             className="p-3 my-2 w-full"
           />
+          <div className="flex items-center gap-3 w-full text-white">
+             <label className="text-white text-xs" htmlFor="file">Uploader le Cv</label>
           <input
             type="file"
             onChange={(e) => setCv(e.target.files[0])}
             required
             className="p-3 my-2 w-full"
+            id="file"
           />
+          </div>
+         
           <button
             type="submit"
             disabled={loading}
